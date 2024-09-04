@@ -1,4 +1,5 @@
 ﻿using ChoiceService.DTOs;
+using ChoiceService.Exceptions;
 using System.Text.Json;
 
 namespace ChoiceService.Services
@@ -34,8 +35,26 @@ namespace ChoiceService.Services
             catch (HttpRequestException ex)
             {
                 _logger.LogError(ex, "Error calling the random number API.");
+                return GetFallbackRandomNumber();
+            }
+            catch (JsonException ex)
+            {
+                _logger.LogError(ex, "Error deserializing the response from the random number API.");
                 throw;
             }
+            catch (Exception ex)
+            {
+                // If something critical happens, escalate with a custom exception
+                _logger.LogError(ex, "Critical failure. Throwing custom exception.");
+                throw new ExternalServiceException("Failed to retrieve random number after multiple retries.", ex);
+            }
+        }
+
+        private int GetFallbackRandomNumber()
+        {
+            _logger.LogWarning("Using fallback random number due to API failure.");
+            var random = new Random();
+            return random.Next(1, 101);
         }
     }
 }

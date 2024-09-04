@@ -1,4 +1,5 @@
-﻿using ChoiceService.Services;
+﻿using ChoiceService.Exceptions;
+using ChoiceService.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChoiceService.Controllers
@@ -24,8 +25,23 @@ namespace ChoiceService.Controllers
         [HttpGet("random")]
         public async Task<IActionResult> GetRandomChoice()
         {
-            var randomChoice = await _choiceService.GetRandomChoiceAsync();
-            return Ok(randomChoice);
+            try
+            {
+                var randomChoice = await _choiceService.GetRandomChoiceAsync();
+                return Ok(randomChoice);
+            }
+            catch (ExternalServiceException ex)
+            {
+                return StatusCode(503, new { message = ex.Message });
+            }
+            catch (DeserializationException ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An unexpected error occurred", detail = ex.Message });
+            }
         }
     }
 }
