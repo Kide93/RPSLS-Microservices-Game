@@ -1,0 +1,95 @@
+# Ignore Visual Studio temporary files, build results, and
+# package files
+
+# User-specific files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+# Uncomment if you have any other build artifacts folder
+# [Bb]uild/
+
+# Common .NET files
+*.buildinfo
+*.pidb
+*.svclog
+*.scc
+*.cache
+*.ilk
+*.meta
+*.pdb
+*.mdb
+*.opendb
+*.vspx
+*.vsp
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*_i.h
+*.aps
+*.ncb
+*.res
+*.rdl.data
+*.rdlc.data
+*.rptproj.user
+*.rsuser
+*.sln.docstates
+
+# Uncomment if you have Node.js projects
+# node_modules/
+
+# Docker support
+.docker/
+docker-compose.override.yml
+docker-compose.*
+
+# Environment variables
+.env
+
+# VS Code directories
+.vscode/
+.vscode/settings.json
+
+# MacOS
+.DS_Store
+
+# Windows specific
+[Tt]humbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Optional shared files
+/SharedLibrary/bin/
+/SharedLibrary/obj/
+
+# ASP.NET specific
+!.well-known
+appsettings.*.json
+
+# Include Docker logs if required
+*.log
+docker-compose.override.yml
