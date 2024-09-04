@@ -6,13 +6,15 @@ namespace ChoiceService.Services
 {
     public class ChoiceService : IChoiceService
     {
+        private readonly ILogger<ChoiceService> _logger;
         private readonly IChoiceRepository _choiceRepository;
         private readonly IRandomNumberService _randomNumberService;
 
-        public ChoiceService(IChoiceRepository choiceRepository, IRandomNumberService randomNumberService)
+        public ChoiceService(IChoiceRepository choiceRepository, IRandomNumberService randomNumberService, ILogger<ChoiceService> logger)
         {
             _choiceRepository = choiceRepository;
             _randomNumberService = randomNumberService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -56,6 +58,12 @@ namespace ChoiceService.Services
         /// </summary>
         private int MapRandomNumberToChoice(int randomNumber)
         {
+            if (randomNumber < 1 || randomNumber > 100)
+            {
+                _logger.LogWarning($"Random number {randomNumber} is out of the expected range (1-100). Returning default choice (Spock).");
+                return (int)ChoiceEnum.Spock;
+            }
+
             return randomNumber switch
             {
                 >= 1 and <= 20 => (int)ChoiceEnum.Rock,

@@ -1,9 +1,13 @@
 using ChoiceService.Repositories;
 using ChoiceService.Services;
+using ChoiceService.Settings;
 using Polly;
 using Polly.Extensions.Http;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<ExternalApiSettings>(
+    builder.Configuration.GetSection("ExternalApiSettings"));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
