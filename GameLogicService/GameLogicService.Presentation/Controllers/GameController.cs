@@ -1,7 +1,7 @@
-﻿using GameLogicService.Business.Contracts;
-using GameLogicService.Presentation.DTOs;
+﻿using GameLogicService.Business.Boundaries;
+using GameLogicService.Business.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Enums;
 
 namespace GameLogicService.Presentation.Controllers
 {
@@ -9,26 +9,19 @@ namespace GameLogicService.Presentation.Controllers
     [Route("api/[controller]")]
     public class GameController : ControllerBase
     {
-        private readonly IGameLogicService _gameLogicService;
+        private readonly IMediator _mediator;
 
-
-        public GameController(IGameLogicService gameLogicService)
+        public GameController(IMediator mediator)
         {
-            _gameLogicService = gameLogicService;
+            _mediator = mediator;
         }
 
         [HttpPost("play")]
-        public async Task<IActionResult> PlayGame([FromBody] GameRequestDto gameRequest)
+        [ProducesResponseType(statusCode: 200, type: typeof(GameResultResponse))]
+        public async Task<IActionResult> PlayGame([FromBody] PlayerChoiceRequest playerChoiceRequest, CancellationToken cancellationToken)
         {
-            // TODO: move validation from here
-            if (!Enum.IsDefined(typeof(ChoiceEnum), gameRequest.PlayerChoice))
-            {
-                return BadRequest("Invalid player choice.");
-            }
-
-            var gameResult = await _gameLogicService.Play(gameRequest.PlayerChoice);
-
-            return Ok(gameResult);
+            var result = await _mediator.Send(playerChoiceRequest, cancellationToken);
+            return Ok(result);
         }
     }
 }
