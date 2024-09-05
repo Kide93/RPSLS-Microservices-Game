@@ -1,4 +1,5 @@
 using GameLogicService.Business.Contracts;
+using GameLogicService.Business.Implementations;
 using GameLogicService.Business.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddHttpClient<IGameLogicService, GameLogicService.Business.Implementations.GameLogicService>();
+builder.Services.AddTransient<IChoiceStateFactory, ChoiceStateFactory>();
 
 var app = builder.Build();
 

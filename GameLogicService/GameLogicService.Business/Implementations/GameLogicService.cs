@@ -2,7 +2,6 @@
 using GameLogicService.Business.Exceptions;
 using GameLogicService.Business.Models;
 using GameLogicService.Business.Settings;
-using GameLogicService.Business.States;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Shared.DTOs;
@@ -14,12 +13,14 @@ namespace GameLogicService.Business.Implementations
 {
     public class GameLogicService : IGameLogicService
     {
+        private readonly IChoiceStateFactory _choiceStateFactory;
         private readonly HttpClient _httpClient;
         private readonly ILogger<GameLogicService> _logger;
         private readonly string _randomChoiceApiUrl;
 
-        public GameLogicService(HttpClient httpClient, ILogger<GameLogicService> logger, IOptions<ExternalApiSettings> options)
+        public GameLogicService(IChoiceStateFactory choiceStateFactory, HttpClient httpClient, ILogger<GameLogicService> logger, IOptions<ExternalApiSettings> options)
         {
+            _choiceStateFactory = choiceStateFactory;
             _httpClient = httpClient;
             _logger = logger;
             _randomChoiceApiUrl = options.Value.ChoiceServiceApiUrl;
@@ -39,32 +40,12 @@ namespace GameLogicService.Business.Implementations
                 throw new InvalidChoiceException("Invalid choice provided.");
             }
 
-            var playerState = GetStateForChoice(playerChoice);
-            var computerState = GetStateForChoice(computerChoice);
+            var playerState = _choiceStateFactory.GetStateForChoice(playerChoice);
+            var computerState = _choiceStateFactory.GetStateForChoice(computerChoice);
 
             var result = playerState.CalculateResult(computerState);
 
-            return new GameResult
-            {
-                PlayerChoice = (int)playerChoice,
-                ComputerChoice = (int)computerChoice,
-                Result = (int)result
-            };
-        }
-
-        // TODO: Move this from here
-        private IChoiceState GetStateForChoice(ChoiceEnum choice)
-        {
-            return choice switch
-            {
-                ChoiceEnum.Rock => new RockState(),
-                ChoiceEnum.Paper => new PaperState(),
-                ChoiceEnum.Scissors => new ScissorsState(),
-                ChoiceEnum.Lizard => new LizardState(),
-                ChoiceEnum.Spock => new SpockState(),
-                // TODO: Handle exception gracefully
-                _ => throw new ArgumentException($"Unknown choice: {choice}")
-            };
+            return new GameResult(playerChoice, computerChoice, result);
         }
 
         private async Task<ChoiceEnum> GetRandomChoiceFromApi()
