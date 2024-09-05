@@ -39,8 +39,8 @@ namespace GameLogicService.Business.Handlers
             {
                 try
                 {
-                    //var computerChoice = await _externalApiService.GetRandomChoiceAsync();
-                    var computerChoice = ChoiceEnum.Rock;
+                    var computerChoice = await _externalApiService.GetRandomChoiceAsync();
+                    //var computerChoice = ChoiceEnum.Rock;
 
                     var playerState = _choiceStateFactory.GetStateForChoice(request.Choice);
                     var computerState = _choiceStateFactory.GetStateForChoice(computerChoice);

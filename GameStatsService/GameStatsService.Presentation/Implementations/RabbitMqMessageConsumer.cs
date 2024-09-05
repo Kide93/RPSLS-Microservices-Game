@@ -19,7 +19,7 @@ namespace GameStatsService.Presentation.Implementations
         {
             _scoreboardService = scoreboardService;
             _logger = logger;
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory() { HostName = "rabbitmq" };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
             _channel.QueueDeclare(queue: "gameResults",

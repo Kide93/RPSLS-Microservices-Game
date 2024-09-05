@@ -8,12 +8,13 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-COPY ["GameStatsService.Presentation/GameStatsService.Presentation.csproj", "GameStatsService.Presentation/"]
+COPY ["GameStatsService/GameStatsService.Presentation/GameStatsService.Presentation.csproj", "GameStatsService/GameStatsService.Presentation/"]
 COPY ["Shared/Shared.csproj", "Shared/"]
 
-RUN dotnet restore "./GameStatsService.Presentation/GameStatsService.Presentation.csproj"
+RUN dotnet restore "GameStatsService/GameStatsService.Presentation/GameStatsService.Presentation.csproj"
 COPY . .
-WORKDIR "/src/GameStatsService.Presentation"
+WORKDIR "/src/GameStatsService/GameStatsService.Presentation"
+
 RUN dotnet build "./GameStatsService.Presentation.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

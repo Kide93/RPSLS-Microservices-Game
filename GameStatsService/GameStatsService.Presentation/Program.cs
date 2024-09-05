@@ -4,9 +4,7 @@ using GameStatsService.Presentation.Implementations;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<RabbitMqMessageConsumer>();
-
 builder.Services.AddSingleton<IScoreboardService, ScoreboardService>();
-builder.Services.AddSingleton<RabbitMqMessageConsumer>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

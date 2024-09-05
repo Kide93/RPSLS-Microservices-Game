@@ -15,7 +15,7 @@ namespace GameLogicService.Business.Implementations
 
         public RabbitMqMessagePublisher()
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory() { HostName = "rabbitmq" };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
             _channel.QueueDeclare(queue: "gameResults",
