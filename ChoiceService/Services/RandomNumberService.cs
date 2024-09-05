@@ -2,6 +2,7 @@
 using ChoiceService.Settings;
 using Microsoft.Extensions.Options;
 using Shared.Exceptions;
+using System.Net;
 using System.Text.Json;
 
 namespace ChoiceService.Services
@@ -37,18 +38,18 @@ namespace ChoiceService.Services
             }
             catch (HttpRequestException ex)
             {
-                _logger.LogWarning(ex, "Error calling the random number API.");
+                _logger.LogError(ex, "Error connecting to external service.");
                 return GetFallbackRandomNumber();
             }
             catch (JsonException ex)
             {
-                _logger.LogError(ex, "Error deserializing the response from the random number API.");
-                throw;
+                _logger.LogError(ex, "Error parsing response from external service.");
+                throw new ExternalServiceException("Invalid response from external service.", ex, HttpStatusCode.BadRequest);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Critical failure.");
-                throw new ExternalServiceException("Failed to retrieve random number after multiple retries.", ex);
+                throw new ExternalServiceException("Failed to retrieve random number after multiple retries.", ex, HttpStatusCode.InternalServerError);
             }
         }
 

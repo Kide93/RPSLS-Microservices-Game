@@ -1,6 +1,8 @@
 ﻿using GameLogicService.Business.Contracts;
 using RabbitMQ.Client;
 using Shared.Events;
+using Shared.Exceptions;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 
@@ -23,17 +25,25 @@ namespace GameLogicService.Business.Implementations
                 arguments: null);
         }
 
-        public Task PublishGameResultEvent(GameResultEvent gameResultEvent)
+        public async Task PublishGameResultEvent(GameResultEvent gameResultEvent)
         {
-            var json = JsonSerializer.Serialize(gameResultEvent);
-            var body = Encoding.UTF8.GetBytes(json);
+            try
+            {
+                var json = JsonSerializer.Serialize(gameResultEvent);
+                var body = Encoding.UTF8.GetBytes(json);
 
-            _channel.BasicPublish(exchange: "",
-                routingKey: "gameResults",
-                basicProperties: null,
-                body: body);
-
-            return Task.CompletedTask;
+                _channel.BasicPublish(exchange: "",
+                    routingKey: "gameResults",
+                    basicProperties: null,
+                    body: body);
+                await Task.CompletedTask;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it accordingly
+                Console.WriteLine($"Error publishing message: {ex.Message}");
+                throw new ExternalServiceException("Failed to publish game result event", ex, HttpStatusCode.InternalServerError);
+            }
         }
     }
 }

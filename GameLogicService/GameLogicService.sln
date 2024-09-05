@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogicService.Presentation", "GameLogicService.Presentation\GameLogicService.Presentation.csproj", "{62FEA317-C30B-4BF9-9122-04EDEBABCB83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameLogicService.Presentation", "GameLogicService.Presentation\GameLogicService.Presentation.csproj", "{62FEA317-C30B-4BF9-9122-04EDEBABCB83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogicService.Business", "GameLogicService.Business\GameLogicService.Business.csproj", "{9EBC36AA-4300-45A0-9B33-1FB0C0D41078}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogicService.Data", "GameLogicService.Data\GameLogicService.Data.csproj", "{AE48E0DE-D472-4A71-9979-1D2B4445FB13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameLogicService.Business", "GameLogicService.Business\GameLogicService.Business.csproj", "{9EBC36AA-4300-45A0-9B33-1FB0C0D41078}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "..\Shared\Shared.csproj", "{CC55074B-8611-41CD-9466-64F10EBF6797}"
 EndProject
@@ -25,10 +23,6 @@ Global
 		{9EBC36AA-4300-45A0-9B33-1FB0C0D41078}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EBC36AA-4300-45A0-9B33-1FB0C0D41078}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EBC36AA-4300-45A0-9B33-1FB0C0D41078}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE48E0DE-D472-4A71-9979-1D2B4445FB13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE48E0DE-D472-4A71-9979-1D2B4445FB13}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE48E0DE-D472-4A71-9979-1D2B4445FB13}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE48E0DE-D472-4A71-9979-1D2B4445FB13}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CC55074B-8611-41CD-9466-64F10EBF6797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CC55074B-8611-41CD-9466-64F10EBF6797}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC55074B-8611-41CD-9466-64F10EBF6797}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -37,25 +37,34 @@ namespace GameLogicService.Business.Handlers
 
             public async Task<GameResultResponse> Handle(PlayerChoiceRequest request, CancellationToken cancellationToken)
             {
-                var computerChoice = await _externalApiService.GetRandomChoiceAsync();
-
-                var playerState = _choiceStateFactory.GetStateForChoice(request.Choice);
-                var computerState = _choiceStateFactory.GetStateForChoice(computerChoice);
-
-                var result = playerState.CalculateResult(computerState);
-
-                var gameResultEvent = new GameResultEvent
+                try
                 {
-                    UserId = Guid.NewGuid().ToString(),
-                    PlayerChoice = request.Choice,
-                    ComputerChoice = computerChoice,
-                    Result = result,
-                    Timestamp = DateTime.UtcNow
-                };
+                    //var computerChoice = await _externalApiService.GetRandomChoiceAsync();
+                    var computerChoice = ChoiceEnum.Rock;
 
-                await _messagePublisher.PublishGameResultEvent(gameResultEvent);
+                    var playerState = _choiceStateFactory.GetStateForChoice(request.Choice);
+                    var computerState = _choiceStateFactory.GetStateForChoice(computerChoice);
 
-                return new GameResultResponse(request.Choice, computerChoice, result);
+                    var result = playerState.CalculateResult(computerState);
+
+                    var gameResultEvent = new GameResultEvent
+                    {
+                        UserId = Guid.NewGuid().ToString(),
+                        PlayerChoice = request.Choice,
+                        ComputerChoice = computerChoice,
+                        Result = result,
+                        Timestamp = DateTime.UtcNow
+                    };
+
+                    await _messagePublisher.PublishGameResultEvent(gameResultEvent);
+
+                    return new GameResultResponse(request.Choice, computerChoice, result);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
         }
     }
