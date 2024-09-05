@@ -7,13 +7,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GameStatsService.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Resultsrelation : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Results",
+                name: "GameResults",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -26,7 +26,23 @@ namespace GameStatsService.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Results", x => x.Id);
+                    table.PrimaryKey("PK_GameResults", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Scoreboards",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Wins = table.Column<int>(type: "integer", nullable: false),
+                    Losses = table.Column<int>(type: "integer", nullable: false),
+                    Ties = table.Column<int>(type: "integer", nullable: false),
+                    IsGlobal = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Scoreboards", x => x.Id);
                 });
         }
 
@@ -34,7 +50,10 @@ namespace GameStatsService.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Results");
+                name: "GameResults");
+
+            migrationBuilder.DropTable(
+                name: "Scoreboards");
         }
     }
 }

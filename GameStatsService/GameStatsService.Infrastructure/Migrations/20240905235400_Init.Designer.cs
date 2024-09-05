@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GameStatsService.Infrastructure.Migrations
 {
     [DbContext(typeof(GameStatsDbContext))]
-    [Migration("20240905215536_Results relation")]
-    partial class Resultsrelation
+    [Migration("20240905235400_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace GameStatsService.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("GameStatsService.Infrastructure.Models.Results", b =>
+            modelBuilder.Entity("GameStatsService.Infrastructure.Models.GameResult", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace GameStatsService.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Results");
+                    b.ToTable("GameResults");
                 });
 
             modelBuilder.Entity("GameStatsService.Infrastructure.Models.Scoreboard", b =>
@@ -61,6 +61,9 @@ namespace GameStatsService.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsGlobal")
+                        .HasColumnType("boolean");
 
                     b.Property<int>("Losses")
                         .HasColumnType("integer");
@@ -73,7 +76,7 @@ namespace GameStatsService.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Scoreboard");
+                    b.ToTable("Scoreboards");
                 });
 #pragma warning restore 612, 618
         }

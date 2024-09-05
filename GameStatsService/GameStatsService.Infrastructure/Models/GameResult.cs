@@ -1,6 +1,6 @@
 ﻿namespace GameStatsService.Infrastructure.Models
 {
-    public class Results
+    public class GameResult
     {
         public int Id { get; set; }
         public string UserId { get; set; }

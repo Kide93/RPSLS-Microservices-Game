@@ -1,12 +1,16 @@
+using FluentValidation;
+using GameStatsService.Business;
+using GameStatsService.Business.Validators;
 using GameStatsService.Infrastructure;
-using GameStatsService.Presentation.Contracts;
+using GameStatsService.Infrastructure.Repository;
 using GameStatsService.Presentation.Implementations;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<RabbitMqMessageConsumer>();
-builder.Services.AddSingleton<IScoreboardService, ScoreboardService>();
+builder.Services.AddScoped<IRepository, Repository>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -14,6 +18,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<GameStatsDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("GameStatsDb")));
+
+builder.Services.AddMediatR(AssemblyReference.Reference);
+builder.Services.AddValidatorsFromAssembly(AssemblyReference.Reference);
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
 var app = builder.Build();
 
@@ -27,6 +35,7 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<GameStatsDbContext>();
     dbContext.Database.Migrate();
+    dbContext.Initialize();
 }
 
 app.UseHttpsRedirection();

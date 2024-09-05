@@ -1,4 +1,6 @@
-﻿using GameStatsService.Presentation.Contracts;
+﻿using GameStatsService.Business.Requests;
+using GameStatsService.Presentation.Contracts;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameStatsService.Presentation.Controllers
@@ -8,10 +10,12 @@ namespace GameStatsService.Presentation.Controllers
     public class ScoreboardController : ControllerBase
     {
         private readonly IScoreboardService _scoreboardService;
+        private readonly IMediator _mediator;
 
-        public ScoreboardController(IScoreboardService scoreboardService)
+        public ScoreboardController(IScoreboardService scoreboardService, IMediator mediator)
         {
             _scoreboardService = scoreboardService;
+            _mediator = mediator;
         }
 
         [HttpGet("global")]
@@ -30,6 +34,13 @@ namespace GameStatsService.Presentation.Controllers
                 return NotFound();
             }
             return Ok(scoreboard);
+        }
+
+        [HttpPost("addresult")]
+        public async Task<IActionResult> AddResult([FromBody] GameResultRequest gameResultRequest)
+        {
+            await _mediator.Send(gameResultRequest);
+            return Ok();
         }
     }
 }
