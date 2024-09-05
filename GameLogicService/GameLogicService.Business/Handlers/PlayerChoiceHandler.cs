@@ -3,6 +3,7 @@ using GameLogicService.Business.Contracts;
 using GameLogicService.Business.Models;
 using MediatR;
 using Shared.Enums;
+using Shared.Events;
 
 namespace GameLogicService.Business.Handlers
 {
@@ -22,13 +23,16 @@ namespace GameLogicService.Business.Handlers
         {
             private readonly IChoiceStateFactory _choiceStateFactory;
             private readonly IExternalApiService _externalApiService;
+            private readonly IMessagePublisher _messagePublisher;
 
             public CommandHandler(
                 IChoiceStateFactory choiceStateFactory,
-                IExternalApiService externalApiService)
+                IExternalApiService externalApiService,
+                IMessagePublisher messagePublisher)
             {
                 _choiceStateFactory = choiceStateFactory;
                 _externalApiService = externalApiService;
+                _messagePublisher = messagePublisher;
             }
 
             public async Task<GameResultResponse> Handle(PlayerChoiceRequest request, CancellationToken cancellationToken)
@@ -39,6 +43,17 @@ namespace GameLogicService.Business.Handlers
                 var computerState = _choiceStateFactory.GetStateForChoice(computerChoice);
 
                 var result = playerState.CalculateResult(computerState);
+
+                var gameResultEvent = new GameResultEvent
+                {
+                    UserId = Guid.NewGuid().ToString(),
+                    PlayerChoice = request.Choice,
+                    ComputerChoice = computerChoice,
+                    Result = result,
+                    Timestamp = DateTime.UtcNow
+                };
+
+                await _messagePublisher.PublishGameResultEvent(gameResultEvent);
 
                 return new GameResultResponse(request.Choice, computerChoice, result);
             }

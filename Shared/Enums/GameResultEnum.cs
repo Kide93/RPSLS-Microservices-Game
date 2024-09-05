@@ -1,4 +1,4 @@
-﻿namespace GameLogicService.Business.Models
+﻿namespace Shared.Enums
 {
     public enum GameResultEnum
     {

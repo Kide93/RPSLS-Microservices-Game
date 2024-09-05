@@ -1,5 +1,5 @@
 ﻿using GameLogicService.Business.Contracts;
-using GameLogicService.Business.Models;
+using Shared.Enums;
 
 namespace GameLogicService.Business.States
 {
