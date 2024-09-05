@@ -1,0 +1,6 @@
+@GameLogicService.Presentation_HostAddress = http://localhost:5260
+
+GET {{GameLogicService.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

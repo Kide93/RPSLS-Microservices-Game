@@ -1,6 +1,7 @@
 ﻿using ChoiceService.DTOs;
 using ChoiceService.Models;
 using ChoiceService.Repositories;
+using Shared.DTOs;
 
 namespace ChoiceService.Services
 {
@@ -36,15 +37,14 @@ namespace ChoiceService.Services
         /// <summary>
         /// Retrieves a random choice using the external random number service.
         /// </summary>
-        public async Task<ChoiceDto> GetRandomChoiceAsync()
+        public async Task<RandomChoiceResponseDto> GetRandomChoiceAsync()
         {
             var randomNumber = await _randomNumberService.GetRandomNumberAsync();
 
             var choiceId = MapRandomNumberToChoice(randomNumber);
-
             var randomChoice = (ChoiceEnum)choiceId;
 
-            var choiceDto = new ChoiceDto
+            var choiceDto = new RandomChoiceResponseDto
             {
                 Id = (int)randomChoice,
                 Name = randomChoice.ToString()

@@ -5,9 +5,11 @@ VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChoiceService", "ChoiceService.csproj", "{7B292ABA-638C-4C38-86C4-530CAF8F48FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChoiceService.Tests.Unit", "..\ChoiceService.Tests.Unit\ChoiceService.Tests.Unit.csproj", "{F1EB1B0B-D674-4AB2-BACA-E2AE3E6E981C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChoiceService.Tests.Unit", "..\ChoiceService.Tests.Unit\ChoiceService.Tests.Unit.csproj", "{F1EB1B0B-D674-4AB2-BACA-E2AE3E6E981C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChoiceService.Tests.Integration", "..\ChoiceService.Tests.Integration\ChoiceService.Tests.Integration.csproj", "{08452A07-9C5B-4FE9-B1B0-A05F82E52680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChoiceService.Tests.Integration", "..\ChoiceService.Tests.Integration\ChoiceService.Tests.Integration.csproj", "{08452A07-9C5B-4FE9-B1B0-A05F82E52680}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "..\Shared\Shared.csproj", "{65C8191D-E23F-497A-9734-87E506DEBF89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{08452A07-9C5B-4FE9-B1B0-A05F82E52680}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08452A07-9C5B-4FE9-B1B0-A05F82E52680}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08452A07-9C5B-4FE9-B1B0-A05F82E52680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65C8191D-E23F-497A-9734-87E506DEBF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65C8191D-E23F-497A-9734-87E506DEBF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65C8191D-E23F-497A-9734-87E506DEBF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65C8191D-E23F-497A-9734-87E506DEBF89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

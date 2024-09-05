@@ -1,4 +1,5 @@
 ﻿using ChoiceService.DTOs;
+using Shared.DTOs;
 
 namespace ChoiceService.Services
 {
@@ -12,7 +13,6 @@ namespace ChoiceService.Services
         /// <summary>
         /// Retrieves a random choice using the external random number service.
         /// </summary>
-        Task<ChoiceDto> GetRandomChoiceAsync();
+        Task<RandomChoiceResponseDto> GetRandomChoiceAsync();
     }
-
 }

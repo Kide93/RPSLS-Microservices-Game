@@ -1,7 +1,7 @@
 ﻿using ChoiceService.DTOs;
-using ChoiceService.Exceptions;
 using ChoiceService.Settings;
 using Microsoft.Extensions.Options;
+using Shared.Exceptions;
 using System.Text.Json;
 
 namespace ChoiceService.Services
