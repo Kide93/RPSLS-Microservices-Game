@@ -18,7 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddHttpClient<PlayerChoiceHandler.CommandHandler>(client =>
+builder.Services.AddHttpClient<IExternalApiService, ExternalApiService>(client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["ExternalApiSettings:ChoiceServiceApiUrl"]);
 }).AddPolicyHandler(GetRetryPolicy());

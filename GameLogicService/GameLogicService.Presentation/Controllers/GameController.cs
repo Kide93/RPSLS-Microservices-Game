@@ -1,5 +1,4 @@
-﻿using GameLogicService.Business.Boundaries;
-using GameLogicService.Business.Models;
+﻿using GameLogicService.Business.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

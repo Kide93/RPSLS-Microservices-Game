@@ -1,10 +1,15 @@
-﻿namespace Shared.Exceptions
+﻿using System.Net;
+
+namespace Shared.Exceptions
 {
     public class ExternalServiceException : Exception
     {
-        public ExternalServiceException(string message, Exception innerException)
+        public HttpStatusCode StatusCode { get; }
+
+        public ExternalServiceException(string message, Exception innerException, HttpStatusCode statusCode)
             : base(message, innerException)
         {
+            StatusCode = statusCode;
         }
 
         public ExternalServiceException(string message)

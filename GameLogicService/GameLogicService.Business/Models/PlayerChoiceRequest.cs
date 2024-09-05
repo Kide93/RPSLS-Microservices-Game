@@ -1,8 +1,7 @@
-﻿using GameLogicService.Business.Models;
-using MediatR;
+﻿using MediatR;
 using Shared.Enums;
 
-namespace GameLogicService.Business.Boundaries
+namespace GameLogicService.Business.Models
 {
     public class PlayerChoiceRequest : IRequest<GameResultResponse>
     {

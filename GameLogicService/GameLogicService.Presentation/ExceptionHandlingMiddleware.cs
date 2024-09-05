@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Shared.Exceptions;
 
 namespace GameLogicService.Presentation
 {
@@ -18,6 +19,12 @@ namespace GameLogicService.Presentation
             try
             {
                 await _next(context);
+            }
+            catch (ExternalServiceException ex)
+            {
+                _logger.LogError(ex, "External service error occurred.");
+                context.Response.StatusCode = (int)ex.StatusCode;
+                await context.Response.WriteAsJsonAsync(new { Message = ex.Message });
             }
             catch (ValidationException ex)
             {
