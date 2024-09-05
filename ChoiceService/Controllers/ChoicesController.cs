@@ -1,6 +1,7 @@
 ﻿using ChoiceService.Exceptions;
 using ChoiceService.Services;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Exceptions;
 
 namespace ChoiceService.Controllers
 {

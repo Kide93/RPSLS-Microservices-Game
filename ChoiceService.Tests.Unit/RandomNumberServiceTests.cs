@@ -1,10 +1,10 @@
-﻿using ChoiceService.Exceptions;
-using ChoiceService.Services;
+﻿using ChoiceService.Services;
 using ChoiceService.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Protected;
+using Shared.Exceptions;
 using Shouldly;
 using System.Net;
 

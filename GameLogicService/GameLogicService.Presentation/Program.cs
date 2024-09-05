@@ -1,15 +1,20 @@
+using GameLogicService.Business.Contracts;
+using GameLogicService.Business.Settings;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.Configure<ExternalApiSettings>(
+    builder.Configuration.GetSection("ExternalApiSettings"));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddHttpClient<IGameLogicService, GameLogicService.Business.Implementations.GameLogicService>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

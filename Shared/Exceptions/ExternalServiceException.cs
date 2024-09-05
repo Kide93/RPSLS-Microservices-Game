@@ -1,4 +1,4 @@
-﻿namespace ChoiceService.Exceptions
+﻿namespace Shared.Exceptions
 {
     public class ExternalServiceException : Exception
     {
