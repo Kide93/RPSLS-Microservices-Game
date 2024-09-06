@@ -1,3 +1,4 @@
+using ChoiceService;
 using ChoiceService.Repositories;
 using ChoiceService.Services;
 using ChoiceService.Settings;
@@ -20,6 +21,8 @@ builder.Services.AddHttpClient<IRandomNumberService, RandomNumberService>().AddP
 builder.Services.AddMemoryCache();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

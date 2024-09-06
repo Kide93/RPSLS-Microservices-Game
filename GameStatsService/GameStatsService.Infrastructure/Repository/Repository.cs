@@ -114,7 +114,6 @@ namespace GameStatsService.Infrastructure.Repository
                 scoreboard.Wins = 0;
                 scoreboard.Losses = 0;
                 scoreboard.Ties = 0;
-                _dbContext.Scoreboards.Update(scoreboard);
             }
 
             await _dbContext.SaveChangesAsync();
@@ -127,7 +126,6 @@ namespace GameStatsService.Infrastructure.Repository
             scoreboard.Wins = 0;
             scoreboard.Ties = 0;
 
-            _dbContext.Scoreboards.Update(scoreboard);
             await _dbContext.SaveChangesAsync();
         }
 
@@ -135,42 +133,42 @@ namespace GameStatsService.Infrastructure.Repository
         {
             var scoreboard = await GetScoreboard();
             scoreboard.Losses++;
-            await UpdateScoreboard(scoreboard);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task IncrementWins()
         {
             var scoreboard = await GetScoreboard();
             scoreboard.Wins++;
-            await UpdateScoreboard(scoreboard);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task IncrementTies()
         {
             var scoreboard = await GetScoreboard();
             scoreboard.Ties++;
-            await UpdateScoreboard(scoreboard);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task IncrementLosses(string userId)
         {
             var scoreboard = await GetOrCreateScoreboard(userId);
             scoreboard.Losses++;
-            await UpdateScoreboard(scoreboard);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task IncrementWins(string userId)
         {
             var scoreboard = await GetOrCreateScoreboard(userId);
             scoreboard.Wins++;
-            await UpdateScoreboard(scoreboard);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task IncrementTies(string userId)
         {
             var scoreboard = await GetOrCreateScoreboard(userId);
             scoreboard.Ties++;
-            await UpdateScoreboard(scoreboard);
+            await _dbContext.SaveChangesAsync();
         }
 
         private async Task<Scoreboard> GetScoreboard()
@@ -194,12 +192,6 @@ namespace GameStatsService.Infrastructure.Repository
             }
 
             return scoreboard;
-        }
-
-        private async Task UpdateScoreboard(Scoreboard scoreboard)
-        {
-            _dbContext.Scoreboards.Update(scoreboard);
-            await _dbContext.SaveChangesAsync();
         }
     }
 }

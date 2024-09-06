@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/game/{everything}",
+      "DownstreamPathTemplate": "/api/game/outcomes",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,7 +9,19 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/game/{everything}",
+      "UpstreamPathTemplate": "/outcomes",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/game/play",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gamelogicservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/play",
       "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
@@ -25,7 +37,7 @@
       "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
-      "DownstreamPathTemplate": "/api/choices/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -33,7 +45,7 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/choice/{everything}",
+      "UpstreamPathTemplate": "/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post" ]
     }
   ],
