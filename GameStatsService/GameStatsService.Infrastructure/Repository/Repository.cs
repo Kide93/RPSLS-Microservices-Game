@@ -1,5 +1,6 @@
 ﻿using GameStatsService.Business;
 using GameStatsService.Business.Requests;
+using GameStatsService.Business.Responses;
 using GameStatsService.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,10 +30,17 @@ namespace GameStatsService.Infrastructure.Repository
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task GetGlobalScoreboard()
+        public async Task<GlobalScoreboardResponse> GetGlobalScoreboard()
         {
             var scoreboard = await _dbContext.Scoreboards.FirstAsync(_ => _.IsGlobal);
+            var scoreboardDto = new GlobalScoreboardResponse
+            {
+                Losses = scoreboard.Losses,
+                Ties = scoreboard.Ties,
+                Wins = scoreboard.Wins
+            };
 
+            return scoreboardDto;
         }
 
         public async Task ResetScoreboard()

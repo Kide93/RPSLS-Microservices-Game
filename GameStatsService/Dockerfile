@@ -9,6 +9,8 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 COPY ["GameStatsService/GameStatsService.Presentation/GameStatsService.Presentation.csproj", "GameStatsService/GameStatsService.Presentation/"]
+COPY ["GameStatsService/GameStatsService.Business/GameStatsService.Business.csproj", "GameStatsService/GameStatsService.Business/"]
+COPY ["GameStatsService/GameStatsService.Infrastructure/GameStatsService.Infrastructure.csproj", "GameStatsService/GameStatsService.Infrastructure/"]
 COPY ["Shared/Shared.csproj", "Shared/"]
 
 RUN dotnet restore "GameStatsService/GameStatsService.Presentation/GameStatsService.Presentation.csproj"
