@@ -1,18 +1,18 @@
 ﻿using GameLogicService.Business.Contracts;
-using GameLogicService.Business.Models;
+using Shared.Enums;
 
 namespace GameLogicService.Business.States
 {
     public class LizardState : IChoiceState
     {
-        public GameResultEnum CalculateResult(IChoiceState otherChoice)
+        public GameOutcomeEnum CalculateResult(IChoiceState otherChoice)
         {
             return otherChoice switch
             {
-                PaperState => GameResultEnum.Win,
-                SpockState => GameResultEnum.Win,
-                LizardState => GameResultEnum.Tie,
-                _ => GameResultEnum.Lose
+                PaperState => GameOutcomeEnum.Win,
+                SpockState => GameOutcomeEnum.Win,
+                LizardState => GameOutcomeEnum.Tie,
+                _ => GameOutcomeEnum.Lose
             };
         }
     }

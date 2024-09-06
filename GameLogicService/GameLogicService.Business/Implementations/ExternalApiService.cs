@@ -28,6 +28,8 @@ namespace GameLogicService.Business.Implementations
             try
             {
                 var response = await _httpClient.GetAsync(_randomChoiceApiUrl);
+                _logger.LogInformation($"Service URL: {_randomChoiceApiUrl}");
+
                 response.EnsureSuccessStatusCode();
 
                 var content = await response.Content.ReadAsStringAsync();

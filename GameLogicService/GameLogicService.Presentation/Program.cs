@@ -24,6 +24,7 @@ builder.Services.AddHttpClient<IExternalApiService, ExternalApiService>(client =
 }).AddPolicyHandler(GetRetryPolicy());
 
 builder.Services.AddTransient<IChoiceStateFactory, ChoiceStateFactory>();
+builder.Services.AddTransient<IMessagePublisher, RabbitMqMessagePublisher>();
 
 builder.Services.AddMediatR(GameLogicService.Business.AssemblyReference.Reference);
 
