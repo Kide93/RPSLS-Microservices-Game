@@ -42,33 +42,24 @@ namespace GameLogicService.Business.Handlers
 
             public async Task<GameResultResponse> Handle(PlayerChoiceRequest request, CancellationToken cancellationToken)
             {
-                try
+                var computerChoice = await _externalApiService.GetRandomChoiceAsync();
+                var playerState = _choiceStateFactory.GetStateForChoice(request.Choice);
+                var computerState = _choiceStateFactory.GetStateForChoice(computerChoice);
+
+                var result = playerState.CalculateResult(computerState);
+
+                var gameResultEvent = new GameResultEvent
                 {
-                    var computerChoice = await _externalApiService.GetRandomChoiceAsync();
-                    var playerState = _choiceStateFactory.GetStateForChoice(request.Choice);
-                    var computerState = _choiceStateFactory.GetStateForChoice(computerChoice);
+                    UserId = request.UserId,
+                    PlayerChoice = request.Choice,
+                    ComputerChoice = computerChoice,
+                    Result = result,
+                    Timestamp = DateTime.UtcNow
+                };
 
-                    var result = playerState.CalculateResult(computerState);
+                await _messagePublisher.PublishGameResultEvent(gameResultEvent);
 
-                    var gameResultEvent = new GameResultEvent
-                    {
-                        UserId = request.UserId,
-                        PlayerChoice = request.Choice,
-                        ComputerChoice = computerChoice,
-                        Result = result,
-                        Timestamp = DateTime.UtcNow
-                    };
-
-                    await _messagePublisher.PublishGameResultEvent(gameResultEvent);
-
-                    return new GameResultResponse(request.Choice, computerChoice, result);
-                }
-                catch (Exception e)
-                {
-                    // TODO: Handle
-                    Console.WriteLine(e);
-                    throw;
-                }
+                return new GameResultResponse(request.Choice, computerChoice, result);
             }
         }
     }

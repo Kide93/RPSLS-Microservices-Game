@@ -1,8 +1,7 @@
 ﻿using GameLogicService.Business.Contracts;
+using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using Shared.Events;
-using Shared.Exceptions;
-using System.Net;
 using System.Text;
 using System.Text.Json;
 
@@ -12,9 +11,11 @@ namespace GameLogicService.Business.Implementations
     {
         private readonly IConnection _connection;
         private readonly IModel _channel;
+        private readonly ILogger<RabbitMqMessagePublisher> _logger;
 
-        public RabbitMqMessagePublisher()
+        public RabbitMqMessagePublisher(ILogger<RabbitMqMessagePublisher> logger)
         {
+            _logger = logger;
             var factory = new ConnectionFactory() { HostName = "rabbitmq" };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
@@ -40,9 +41,7 @@ namespace GameLogicService.Business.Implementations
             }
             catch (Exception ex)
             {
-                // Log the exception or handle it accordingly
-                Console.WriteLine($"Error publishing message: {ex.Message}");
-                throw new ExternalServiceException("Failed to publish game outcome event", ex, HttpStatusCode.InternalServerError);
+                _logger.LogCritical($"Error publishing message: {ex.Message}");
             }
         }
     }

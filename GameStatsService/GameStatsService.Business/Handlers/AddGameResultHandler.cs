@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using GameStatsService.Business.Repositories;
 using GameStatsService.Business.Requests;
 using MediatR;
 using Shared.Enums;
@@ -31,30 +32,32 @@ namespace GameStatsService.Business.Handlers
 
         public class CommandHandler : IRequestHandler<GameResultRequest, Unit>
         {
-            private readonly IRepository _repository;
+            private readonly IScoreboardRepository _scoreboardRepository;
+            private readonly IGameResultsRepository _gameResultsRepository;
 
-            public CommandHandler(IRepository repository)
+            public CommandHandler(IScoreboardRepository scoreboardRepository, IGameResultsRepository gameResultsRepository)
             {
-                _repository = repository;
+                _scoreboardRepository = scoreboardRepository;
+                _gameResultsRepository = gameResultsRepository;
             }
 
             public async Task<Unit> Handle(GameResultRequest gameResultRequest, CancellationToken cancellationToken)
             {
-                await _repository.AddResult(gameResultRequest, cancellationToken);
+                await _gameResultsRepository.AddResult(gameResultRequest, cancellationToken);
 
                 switch (gameResultRequest.Result)
                 {
                     case GameOutcomeEnum.Win:
-                        await _repository.IncrementWins();
-                        await _repository.IncrementWins(gameResultRequest.UserId);
+                        await _scoreboardRepository.IncrementWins();
+                        await _scoreboardRepository.IncrementWins(gameResultRequest.UserId);
                         break;
                     case GameOutcomeEnum.Lose:
-                        await _repository.IncrementLosses();
-                        await _repository.IncrementLosses(gameResultRequest.UserId);
+                        await _scoreboardRepository.IncrementLosses();
+                        await _scoreboardRepository.IncrementLosses(gameResultRequest.UserId);
                         break;
                     case GameOutcomeEnum.Tie:
-                        await _repository.IncrementTies();
-                        await _repository.IncrementTies(gameResultRequest.UserId);
+                        await _scoreboardRepository.IncrementTies();
+                        await _scoreboardRepository.IncrementTies(gameResultRequest.UserId);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

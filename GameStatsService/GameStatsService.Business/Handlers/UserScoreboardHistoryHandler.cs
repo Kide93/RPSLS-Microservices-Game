@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using GameStatsService.Business.Repositories;
 using GameStatsService.Business.Requests;
 using GameStatsService.Business.Responses;
 using MediatR;
@@ -19,16 +20,16 @@ namespace GameStatsService.Business.Handlers
 
         public class CommandHandler : IRequestHandler<UserScoreboardHistoryRequest, ScoreboardHistoryResponse>
         {
-            private readonly IRepository _repository;
+            private readonly IGameResultsRepository _gameResultsRepository;
 
-            public CommandHandler(IRepository repository)
+            public CommandHandler(IGameResultsRepository gameResultsRepository)
             {
-                _repository = repository;
+                _gameResultsRepository = gameResultsRepository;
             }
 
             public async Task<ScoreboardHistoryResponse> Handle(UserScoreboardHistoryRequest request, CancellationToken cancellationToken)
             {
-                var result = await _repository.GetGameResultsAsync(request.UserId, request.PageNumber, request.PageSize);
+                var result = await _gameResultsRepository.GetGameResultsAsync(request.UserId, request.PageNumber, request.PageSize);
 
                 return new ScoreboardHistoryResponse
                 {

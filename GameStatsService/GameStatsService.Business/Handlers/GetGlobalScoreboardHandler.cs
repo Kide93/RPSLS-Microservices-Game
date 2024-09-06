@@ -1,4 +1,5 @@
-﻿using GameStatsService.Business.Requests;
+﻿using GameStatsService.Business.Repositories;
+using GameStatsService.Business.Requests;
 using GameStatsService.Business.Responses;
 using MediatR;
 
@@ -8,16 +9,16 @@ namespace GameStatsService.Business.Handlers
     {
         public class CommandHandler : IRequestHandler<GlobalScoreboardRequest, ScoreboardResponse>
         {
-            private readonly IRepository _repository;
+            private readonly IScoreboardRepository _scoreboardRepository;
 
-            public CommandHandler(IRepository repository)
+            public CommandHandler(IScoreboardRepository scoreboardRepository)
             {
-                _repository = repository;
+                _scoreboardRepository = scoreboardRepository;
             }
 
             public async Task<ScoreboardResponse> Handle(GlobalScoreboardRequest request, CancellationToken cancellationToken)
             {
-                return await _repository.GetGlobalScoreboard();
+                return await _scoreboardRepository.GetGlobalScoreboard();
             }
         }
     }
