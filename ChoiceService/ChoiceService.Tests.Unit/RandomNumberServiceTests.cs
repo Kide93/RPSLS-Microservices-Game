@@ -1,5 +1,4 @@
 ﻿using ChoiceService.Business.Implementations;
-using ChoiceService.Presentation.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
@@ -7,6 +6,7 @@ using Moq.Protected;
 using Shared.Exceptions;
 using Shouldly;
 using System.Net;
+using ChoiceService.Business.Settings;
 
 namespace ChoiceService.Tests.Unit
 {

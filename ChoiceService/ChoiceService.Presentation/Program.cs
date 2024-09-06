@@ -1,7 +1,9 @@
+using ChoiceService.Business;
 using ChoiceService.Business.Contracts;
 using ChoiceService.Business.Implementations;
+using ChoiceService.Business.Settings;
 using ChoiceService.Presentation;
-using ChoiceService.Presentation.Settings;
+using MediatR;
 using Polly;
 using Polly.Extensions.Http;
 
@@ -14,11 +16,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IChoiceService, ChoiceService.Business.Implementations.ChoiceService>();
-builder.Services.AddScoped<IChoiceRepository, ChoiceRepository>();
+builder.Services.AddScoped<IChoiceProvider, ChoiceProvider>();
 builder.Services.AddHttpClient<IRandomNumberService, RandomNumberService>().AddPolicyHandler(GetRetryPolicy());
 
-builder.Services.AddMemoryCache();
+builder.Services.AddMediatR(AssemblyReference.Reference);
 
 var app = builder.Build();
 

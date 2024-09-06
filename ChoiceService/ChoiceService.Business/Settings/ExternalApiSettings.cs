@@ -1,4 +1,4 @@
-﻿namespace ChoiceService.Presentation.Settings
+﻿namespace ChoiceService.Business.Settings
 {
     public class ExternalApiSettings
     {

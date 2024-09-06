@@ -2,7 +2,7 @@
 
 namespace ChoiceService.Business.Contracts
 {
-    public interface IChoiceRepository
+    public interface IChoiceProvider
     {
         List<Choice> GetAllChoices();
     }

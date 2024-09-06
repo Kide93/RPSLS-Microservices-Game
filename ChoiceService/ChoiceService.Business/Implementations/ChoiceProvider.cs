@@ -3,11 +3,11 @@ using ChoiceService.Business.Models;
 
 namespace ChoiceService.Business.Implementations
 {
-    public class ChoiceRepository : IChoiceRepository
+    public class ChoiceProvider : IChoiceProvider
     {
         private readonly List<Choice> _choices;
 
-        public ChoiceRepository()
+        public ChoiceProvider()
         {
             _choices = Enum.GetValues(typeof(ChoiceEnum))
                 .Cast<ChoiceEnum>()

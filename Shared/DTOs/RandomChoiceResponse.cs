@@ -2,7 +2,7 @@
 
 namespace Shared.DTOs
 {
-    public class RandomChoiceResponseDto
+    public class RandomChoiceResponse
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

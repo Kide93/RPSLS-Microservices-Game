@@ -1,11 +1,11 @@
 ﻿using ChoiceService.Business.Contracts;
-using ChoiceService.Business.DTOs;
-using ChoiceService.Presentation.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Shared.Exceptions;
 using System.Net;
 using System.Text.Json;
+using ChoiceService.Business.Responses;
+using ChoiceService.Business.Settings;
 
 namespace ChoiceService.Business.Implementations
 {
@@ -35,7 +35,7 @@ namespace ChoiceService.Business.Implementations
 
                 var content = await response.Content.ReadAsStringAsync();
 
-                var randomNumberResponse = JsonSerializer.Deserialize<RandomNumberResponseDto>(content);
+                var randomNumberResponse = JsonSerializer.Deserialize<RandomNumberResponse>(content);
                 return randomNumberResponse.RandomNumber;
             }
             catch (HttpRequestException ex)

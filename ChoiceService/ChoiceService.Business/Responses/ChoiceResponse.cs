@@ -1,6 +1,6 @@
-﻿namespace ChoiceService.Business.DTOs
+﻿namespace ChoiceService.Business.Responses
 {
-    public class ChoiceDto
+    public class ChoiceResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }

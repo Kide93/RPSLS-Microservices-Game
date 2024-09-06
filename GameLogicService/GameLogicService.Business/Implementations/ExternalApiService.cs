@@ -33,7 +33,7 @@ namespace GameLogicService.Business.Implementations
                 response.EnsureSuccessStatusCode();
 
                 var content = await response.Content.ReadAsStringAsync();
-                var randomChoiceResponse = JsonSerializer.Deserialize<RandomChoiceResponseDto>(content);
+                var randomChoiceResponse = JsonSerializer.Deserialize<RandomChoiceResponse>(content);
 
                 return (ChoiceEnum)randomChoiceResponse.Id;
             }

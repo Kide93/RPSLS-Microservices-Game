@@ -1,5 +1,5 @@
 ﻿using ChoiceService.Business.Implementations;
-using ChoiceService.Presentation.Settings;
+using ChoiceService.Business.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;

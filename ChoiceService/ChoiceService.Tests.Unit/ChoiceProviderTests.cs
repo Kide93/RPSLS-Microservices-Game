@@ -4,20 +4,20 @@ using Shouldly;
 
 namespace ChoiceService.Tests.Unit
 {
-    public class ChoiceRepositoryTests
+    public class ChoiceProviderTests
     {
-        private readonly ChoiceRepository _choiceRepository;
+        private readonly ChoiceProvider _choiceProvider;
 
-        public ChoiceRepositoryTests()
+        public ChoiceProviderTests()
         {
-            _choiceRepository = new ChoiceRepository();
+            _choiceProvider = new ChoiceProvider();
         }
 
         [Fact]
         public void GetAllChoices_ShouldReturnAllChoices()
         {
             // Act
-            var result = _choiceRepository.GetAllChoices();
+            var result = _choiceProvider.GetAllChoices();
 
             // Assert
             result.ShouldNotBeNull();
@@ -28,7 +28,7 @@ namespace ChoiceService.Tests.Unit
         public void GetAllChoices_ShouldReturnCorrectIdsAndNames()
         {
             // Act
-            var result = _choiceRepository.GetAllChoices();
+            var result = _choiceProvider.GetAllChoices();
 
             // Assert
             result[0].Id.ShouldBe((int)ChoiceEnum.Rock);
@@ -51,7 +51,7 @@ namespace ChoiceService.Tests.Unit
         public void GetAllChoices_ShouldReturnInOrderOfEnumValues()
         {
             // Act
-            var result = _choiceRepository.GetAllChoices();
+            var result = _choiceProvider.GetAllChoices();
 
             // Assert
             result[0].Id.ShouldBe((int)ChoiceEnum.Rock);

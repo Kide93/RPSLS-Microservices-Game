@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace ChoiceService.Business.DTOs
+namespace ChoiceService.Business.Responses
 {
-    public class RandomNumberResponseDto
+    public class RandomNumberResponse
     {
         [JsonPropertyName("random_number")]
         public int RandomNumber { get; set; }

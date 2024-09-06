@@ -1,5 +1,6 @@
-﻿using ChoiceService.Business.Contracts;
-using ChoiceService.Business.DTOs;
+﻿using ChoiceService.Business.Requests;
+using ChoiceService.Business.Responses;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChoiceService.Presentation.Controllers
@@ -8,19 +9,19 @@ namespace ChoiceService.Presentation.Controllers
     [Route("api/[controller]")]
     public class ChoicesController : ControllerBase
     {
-        private readonly IChoiceService _choiceService;
+        private readonly IMediator _mediator;
 
-        public ChoicesController(IChoiceService choiceService)
+        public ChoicesController(IMediator mediator)
         {
-            _choiceService = choiceService;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        [ProducesResponseType(statusCode: 200, type: typeof(List<ChoiceDto>))]
+        [ProducesResponseType(statusCode: 200, type: typeof(List<ChoiceResponse>))]
         public async Task<IActionResult> GetChoices()
         {
-            var choices = await _choiceService.GetAllChoicesAsync();
-            return Ok(choices);
+            var choices = await _mediator.Send(new GetChoicesRequest());
+            return Ok(choices.Choices);
         }
     }
 }
