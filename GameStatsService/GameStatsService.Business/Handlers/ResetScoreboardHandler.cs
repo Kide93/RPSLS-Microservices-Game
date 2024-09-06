@@ -7,16 +7,16 @@ namespace GameStatsService.Business.Handlers
     {
         public class CommandHandler : IRequestHandler<ResetScoreboardRequest, Unit>
         {
-            private readonly IRepository _repository;
+            private readonly IScoreboardRepository _scoreboardRepository;
 
-            public CommandHandler(IRepository repository)
+            public CommandHandler(IScoreboardRepository scoreboardRepository)
             {
-                _repository = repository;
+                _scoreboardRepository = scoreboardRepository;
             }
 
             public async Task<Unit> Handle(ResetScoreboardRequest request, CancellationToken cancellationToken)
             {
-                await _repository.ResetAllScoreboard();
+                await _scoreboardRepository.ResetAllScoreboard();
                 return Unit.Value;
             }
         }

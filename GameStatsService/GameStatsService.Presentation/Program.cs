@@ -1,5 +1,6 @@
 using FluentValidation;
 using GameStatsService.Business;
+using GameStatsService.Business.Repositories;
 using GameStatsService.Business.Validators;
 using GameStatsService.Infrastructure;
 using GameStatsService.Infrastructure.Repository;
@@ -15,7 +16,8 @@ builder.Configuration
     .AddEnvironmentVariables();
 
 builder.Services.AddSingleton<RabbitMqMessageConsumer>();
-builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<IScoreboardRepository, ScoreboardRepository>();
+builder.Services.AddScoped<IGameResultsRepository, GameResultsRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
