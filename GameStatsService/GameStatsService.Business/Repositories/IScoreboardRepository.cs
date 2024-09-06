@@ -1,6 +1,6 @@
 ﻿using GameStatsService.Business.Responses;
 
-namespace GameStatsService.Business
+namespace GameStatsService.Business.Repositories
 {
     public interface IScoreboardRepository
     {
@@ -8,7 +8,6 @@ namespace GameStatsService.Business
         Task ResetUserScoreboard(string userId);
         Task<ScoreboardResponse> GetGlobalScoreboard();
         Task<ScoreboardResponse> GetUserScoreboard(string userId);
-
         Task IncrementLosses();
         Task IncrementWins();
         Task IncrementTies();

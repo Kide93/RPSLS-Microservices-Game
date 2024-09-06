@@ -2,7 +2,7 @@
 using GameStatsService.Infrastructure.Models;
 using Shared.Enums;
 
-namespace GameStatsService.Presentation.Mappers
+namespace GameStatsService.Infrastructure.Mappers
 {
     public static class GameResultMapper
     {

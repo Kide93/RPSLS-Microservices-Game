@@ -1,4 +1,4 @@
-﻿using GameStatsService.Business;
+﻿using GameStatsService.Business.Repositories;
 using GameStatsService.Business.Responses;
 using GameStatsService.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;

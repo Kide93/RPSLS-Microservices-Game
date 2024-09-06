@@ -1,8 +1,8 @@
 ﻿using GameStatsService.Business.Repositories;
 using GameStatsService.Business.Requests;
 using GameStatsService.Business.Responses;
+using GameStatsService.Infrastructure.Mappers;
 using GameStatsService.Infrastructure.Models;
-using GameStatsService.Presentation.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Shared.DTOs;
 

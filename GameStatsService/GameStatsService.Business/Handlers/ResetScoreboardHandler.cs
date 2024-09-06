@@ -1,4 +1,5 @@
-﻿using GameStatsService.Business.Requests;
+﻿using GameStatsService.Business.Repositories;
+using GameStatsService.Business.Requests;
 using MediatR;
 
 namespace GameStatsService.Business.Handlers
