@@ -6,7 +6,7 @@ namespace GameStatsService.Business.Handlers
 {
     public class GetGlobalScoreboardHandler
     {
-        public class CommandHandler : IRequestHandler<GlobalScoreboardRequest, GlobalScoreboardResponse>
+        public class CommandHandler : IRequestHandler<GlobalScoreboardRequest, ScoreboardResponse>
         {
             private readonly IRepository _repository;
 
@@ -15,7 +15,7 @@ namespace GameStatsService.Business.Handlers
                 _repository = repository;
             }
 
-            public async Task<GlobalScoreboardResponse> Handle(GlobalScoreboardRequest request, CancellationToken cancellationToken)
+            public async Task<ScoreboardResponse> Handle(GlobalScoreboardRequest request, CancellationToken cancellationToken)
             {
                 return await _repository.GetGlobalScoreboard();
             }

@@ -1,6 +1,6 @@
 ﻿namespace Shared.Enums
 {
-    public enum GameResultEnum
+    public enum GameOutcomeEnum
     {
         Win,
         Lose,

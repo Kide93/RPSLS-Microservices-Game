@@ -42,7 +42,7 @@ namespace GameLogicService.Business.Implementations
             {
                 // Log the exception or handle it accordingly
                 Console.WriteLine($"Error publishing message: {ex.Message}");
-                throw new ExternalServiceException("Failed to publish game result event", ex, HttpStatusCode.InternalServerError);
+                throw new ExternalServiceException("Failed to publish game outcome event", ex, HttpStatusCode.InternalServerError);
             }
         }
     }

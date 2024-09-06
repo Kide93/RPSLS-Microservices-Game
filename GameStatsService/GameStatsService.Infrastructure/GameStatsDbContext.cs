@@ -22,6 +22,7 @@ namespace GameStatsService.Infrastructure
                 entity.Property(n => n.Wins).IsRequired();
                 entity.Property(n => n.Losses).IsRequired();
                 entity.Property(n => n.Ties).IsRequired();
+                entity.Property(n => n.UserId).IsRequired();
             });
 
             modelBuilder.Entity<GameResult>(entity =>

@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using GameLogicService.Business.Contracts;
-using GameLogicService.Business.Models;
+using GameLogicService.Business.Requests;
+using GameLogicService.Business.Responses;
 using MediatR;
 using Shared.Enums;
 using Shared.Events;
@@ -13,6 +14,10 @@ namespace GameLogicService.Business.Handlers
         {
             public RequestValidator()
             {
+                RuleFor(x => x.UserId)
+                    .Must(userId => !string.IsNullOrEmpty(userId))
+                    .WithMessage("UserId cannot be null or empty.");
+
                 RuleFor(x => x.Choice)
                     .Must(choice => Enum.IsDefined(typeof(ChoiceEnum), choice))
                     .WithMessage("Invalid choice. Please select a valid option.");
@@ -47,7 +52,7 @@ namespace GameLogicService.Business.Handlers
 
                     var gameResultEvent = new GameResultEvent
                     {
-                        UserId = Guid.NewGuid().ToString(),
+                        UserId = request.UserId,
                         PlayerChoice = request.Choice,
                         ComputerChoice = computerChoice,
                         Result = result,
@@ -60,6 +65,7 @@ namespace GameLogicService.Business.Handlers
                 }
                 catch (Exception e)
                 {
+                    // TODO: Handle
                     Console.WriteLine(e);
                     throw;
                 }

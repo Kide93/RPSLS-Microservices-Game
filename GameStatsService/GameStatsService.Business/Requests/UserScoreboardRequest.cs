@@ -3,7 +3,8 @@ using MediatR;
 
 namespace GameStatsService.Business.Requests
 {
-    public class GlobalScoreboardRequest : IRequest<ScoreboardResponse>
+    public class UserScoreboardRequest : IRequest<ScoreboardResponse>
     {
+        public string UserId { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Shared.Enums;
 
-namespace GameLogicService.Business.Models
+namespace GameLogicService.Business.Responses
 {
     public class GameResultResponse
     {
@@ -8,9 +8,9 @@ namespace GameLogicService.Business.Models
         public int PlayerChoice { get; set; }
         public int ComputerChoice { get; set; }
 
-        public GameResultResponse(ChoiceEnum playerChoice, ChoiceEnum computerChoice, GameResultEnum result)
+        public GameResultResponse(ChoiceEnum playerChoice, ChoiceEnum computerChoice, GameOutcomeEnum outcome)
         {
-            Result = (int)result;
+            Result = (int)outcome;
             PlayerChoice = (int)playerChoice;
             ComputerChoice = (int)computerChoice;
         }

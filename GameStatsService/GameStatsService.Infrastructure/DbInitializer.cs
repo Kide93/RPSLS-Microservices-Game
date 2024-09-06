@@ -14,7 +14,8 @@ namespace GameStatsService.Infrastructure
                     IsGlobal = true,
                     Wins = 0,
                     Losses = 0,
-                    Ties = 0
+                    Ties = 0,
+                    UserId = "global"
                 });
                 context.SaveChanges();
             }

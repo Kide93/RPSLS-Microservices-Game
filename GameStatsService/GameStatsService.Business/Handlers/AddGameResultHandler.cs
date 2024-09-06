@@ -20,7 +20,7 @@ namespace GameStatsService.Business.Handlers
                     .WithMessage("Invalid choice. ComputerChoice is not in valid format.");
 
                 RuleFor(x => x.Result)
-                    .Must(choice => Enum.IsDefined(typeof(GameResultEnum), choice))
+                    .Must(choice => Enum.IsDefined(typeof(GameOutcomeEnum), choice))
                     .WithMessage("Invalid choice. Result is not in valid format.");
 
                 RuleFor(x => x.UserId)
@@ -44,14 +44,17 @@ namespace GameStatsService.Business.Handlers
 
                 switch (gameResultRequest.Result)
                 {
-                    case GameResultEnum.Win:
+                    case GameOutcomeEnum.Win:
                         await _repository.IncrementWins();
+                        await _repository.IncrementWins(gameResultRequest.UserId);
                         break;
-                    case GameResultEnum.Lose:
+                    case GameOutcomeEnum.Lose:
                         await _repository.IncrementLosses();
+                        await _repository.IncrementLosses(gameResultRequest.UserId);
                         break;
-                    case GameResultEnum.Tie:
+                    case GameOutcomeEnum.Tie:
                         await _repository.IncrementTies();
+                        await _repository.IncrementTies(gameResultRequest.UserId);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

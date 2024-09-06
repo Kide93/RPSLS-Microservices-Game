@@ -4,6 +4,6 @@ namespace GameLogicService.Business.Contracts
 {
     public interface IChoiceState
     {
-        GameResultEnum CalculateResult(IChoiceState otherChoice);
+        GameOutcomeEnum CalculateResult(IChoiceState otherChoice);
     }
 }

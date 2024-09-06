@@ -5,14 +5,14 @@ namespace GameLogicService.Business.States
 {
     public class ScissorsState : IChoiceState
     {
-        public GameResultEnum CalculateResult(IChoiceState otherChoice)
+        public GameOutcomeEnum CalculateResult(IChoiceState otherChoice)
         {
             return otherChoice switch
             {
-                PaperState => GameResultEnum.Win,
-                LizardState => GameResultEnum.Win,
-                ScissorsState => GameResultEnum.Tie,
-                _ => GameResultEnum.Lose
+                PaperState => GameOutcomeEnum.Win,
+                LizardState => GameOutcomeEnum.Win,
+                ScissorsState => GameOutcomeEnum.Tie,
+                _ => GameOutcomeEnum.Lose
             };
         }
     }
