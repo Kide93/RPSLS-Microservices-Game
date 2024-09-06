@@ -1,0 +1,43 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/game/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gamelogicservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/game/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/scoreboard/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gamestatsservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/stats/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/choices/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "choicesservice",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/choice/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8080"
+  }
+}
