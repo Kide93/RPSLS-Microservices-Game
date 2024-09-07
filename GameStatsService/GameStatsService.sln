@@ -7,9 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStatsService.Presentati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "..\Shared\Shared.csproj", "{DF4BB742-9996-46A1-9DE1-4765FD197D64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStatsService.Infrastructure", "GameStatsService.Infrastructure\GameStatsService.Infrastructure.csproj", "{C0E8FCCB-3484-4CF0-BF16-4EDEF6B89D26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStatsService.Infrastructure", "GameStatsService.Infrastructure\GameStatsService.Infrastructure.csproj", "{C0E8FCCB-3484-4CF0-BF16-4EDEF6B89D26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStatsService.Business", "GameStatsService.Business\GameStatsService.Business.csproj", "{50AFEFB2-C3B8-489F-8831-E3F3BCDC4047}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStatsService.Business", "GameStatsService.Business\GameStatsService.Business.csproj", "{50AFEFB2-C3B8-489F-8831-E3F3BCDC4047}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStatsService.Tests.Unit", "GameStatsService.Tests.Unit\GameStatsService.Tests.Unit.csproj", "{EC31A9F3-3784-4878-983E-38821B9A34EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStatsService.Tests.Integration", "GameStatsService.Tests.Integration\GameStatsService.Tests.Integration.csproj", "{9FE001EF-4A14-43C7-B95C-71F608649991}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{50AFEFB2-C3B8-489F-8831-E3F3BCDC4047}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50AFEFB2-C3B8-489F-8831-E3F3BCDC4047}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50AFEFB2-C3B8-489F-8831-E3F3BCDC4047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC31A9F3-3784-4878-983E-38821B9A34EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC31A9F3-3784-4878-983E-38821B9A34EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC31A9F3-3784-4878-983E-38821B9A34EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC31A9F3-3784-4878-983E-38821B9A34EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FE001EF-4A14-43C7-B95C-71F608649991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FE001EF-4A14-43C7-B95C-71F608649991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FE001EF-4A14-43C7-B95C-71F608649991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FE001EF-4A14-43C7-B95C-71F608649991}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
