@@ -10,9 +10,9 @@ namespace GameLogicService.Business.Handlers
 {
     public class PlayerChoiceHandler
     {
-        public class RequestValidator : AbstractValidator<PlayerChoiceRequest>
+        public class PlayerChoiceRequestValidator : AbstractValidator<PlayerChoiceRequest>
         {
-            public RequestValidator()
+            public PlayerChoiceRequestValidator()
             {
                 RuleFor(x => x.UserId)
                     .Must(userId => !string.IsNullOrEmpty(userId))
