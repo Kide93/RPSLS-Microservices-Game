@@ -35,6 +35,11 @@ namespace GameLogicService.Business.Implementations
                 var content = await response.Content.ReadAsStringAsync();
                 var randomChoiceResponse = JsonSerializer.Deserialize<RandomChoiceResponse>(content);
 
+                if (randomChoiceResponse == null || !Enum.IsDefined(typeof(ChoiceEnum), randomChoiceResponse.Id))
+                {
+                    throw new JsonException("Invalid response format.");
+                }
+
                 return (ChoiceEnum)randomChoiceResponse.Id;
             }
             catch (HttpRequestException ex)
